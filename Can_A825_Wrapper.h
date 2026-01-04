@@ -1,6 +1,7 @@
 #ifndef ARINC_CANIF_H
 #define ARINC_CANIF_H
 
+/***************** return code *****************
 #define A825_SUCCESS                  0
 #define A825_NO_DATA                 -1
 #define A825_ERR_TIMEOUT             -2
@@ -9,25 +10,27 @@
 #define A825_RESOURCE_UNAVAILABLE    -5
 #define A825_UNKNOWN_ERROR           -6
 
-
+****************** cna type ********************
 enum a825_CanType
 {
     A825_CAN = 0,
     A825_CANFD = 1
 };
 
+****************** send mode *******************
 enum A825_SendMode
 {
     A825_SEND_ASYNC = 0,
     A825_SEND_SYNC = 1
 };
 
+******************* receive mode ***************
 enum A825_ReceiveMode
 {
     A825_RECEIVE_NONBLOCK = 0,
     A825_RECEIVE_BLOCK = 1
 };
-
+******************/
 
 typedef struct
 {

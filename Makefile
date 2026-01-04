@@ -75,12 +75,12 @@ LDLIBS = -lcanlib -lpthread -lm
 LIB_NAME = A825_Wrapper
 STATIC_LIB = lib$(LIB_NAME).a
 OBJS =\
-	ARINC_Canif\
+	Can_A825_Wrapper\
 
 SRCS = \
-	ARINC_Canif.c
+	Can_A825_Wrapper.c
 HEADERS = \
-	./ARINC_Canif.h \
+	./Can_A825_Wrapper.h \
 	../../include/canlib.h
 
 OBJS = $(SRCS:.c=.o)
@@ -94,8 +94,6 @@ else
   CFLAGS += $(KV_XTRA_CFLAGS_DEBUG)
 endif
 
-CHECKLOG_FILE = checklog.txt
-
 all: $(STATIC_LIB)
 
 $(STATIC_LIB): $(OBJS)
@@ -106,21 +104,7 @@ sub:	$(STATIC_LIB)
 	@echo "Built examples $(IS_DEBUG)"
 	@echo --------------------------------------------------------------------
 
-install:
-	@echo --------------------------------------------------------------------
-	@echo "Installing examples into $(DESTDIR)$(prefix)/doc/canlib/examples"
-	@echo --------------------------------------------------------------------
-	mkdir -p $(DESTDIR)$(prefix)/doc/canlib/examples
-	cp -r . $(DESTDIR)$(prefix)/doc/canlib/examples
-
-uninstall:
-	rm -rf $(DESTDIR)$(prefix)/doc/canlib/examples
-
 clean:
-	rm -f $(OBJS) *.o *~ $(CHECKLOG_FILE)
-
-check:
-	@echo --------------------------------------------------------------------
-	cppcheck -I ../../include/ -I /usr/include -I /usr/include/linux --enable=all --suppress=toomanyconfigs . > $(CHECKLOG_FILE) 2>&1
-	@cat $(CHECKLOG_FILE)
-	@echo --------------------------------------------------------------------
+	rm -f ../test_lib/*.*
+	cp *.h *.a ../test_lib
+	rm -f *.o *.a
